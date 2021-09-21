@@ -439,7 +439,11 @@
     function containsCheckFn(a) {
       if (typeof a === 'string' || Array.isArray(a)) {
         return function (b) {
-          return a.indexOf(b) !== -1;
+          if (b instanceof RegExp) {
+            return a.some(function(item) { return  item.test(b)});
+          } else {
+            return a.indexOf(b) !== -1;
+          }
         };
       } else if (typeof a === 'object' && a !== null) {
         return function (b) {
