@@ -439,8 +439,8 @@
     function containsCheckFn(a) {
       if (typeof a === 'string' || Array.isArray(a)) {
         return function (b) {
-          if (b instanceof RegExp) {
-            return a.some(function(item) { return  item.test(b)});
+          if (b?.$regex instanceof RegExp) {
+            return a.some(function(item) { return b.$regex.test(item)});
           } else {
             return a.indexOf(b) !== -1;
           }
